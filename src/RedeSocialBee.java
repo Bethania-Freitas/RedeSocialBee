@@ -1,5 +1,3 @@
-package RedeSocial;
-
 import Usuarios.Usuarios;
 
 import java.util.ArrayList;
@@ -8,9 +6,20 @@ import java.util.Scanner;
 
 public class RedeSocialBee {
     Scanner sc = new Scanner(System.in);
-    RedeSocialBee bee = new RedeSocialBee();
     List<Usuarios> perfis = new ArrayList<Usuarios>();
 
+    public static void main(String[] args) {
+        RedeSocialBee bee = new RedeSocialBee();
+        System.out.println("       __         .' '.");
+        System.out.println("     _/__)        .   .       .");
+        System.out.println("    (8|)_}}- .      .        .");
+        System.out.println("     `\\__)    '. . ' ' .  . '");
+        System.out.println();
+        System.out.println("   **** 🐝 Bee 🐝 ****  ");
+        System.out.println("**** Sua rede social ****");
+        System.out.println();
+        bee.menuInicial();
+    }
     public void menuInicial() {
         try {
             System.out.println("»»————-　MENU INICIAL　————-««");
@@ -21,24 +30,24 @@ public class RedeSocialBee {
             int opcaoMenu = sc.nextInt();
             switch (opcaoMenu) {
                 case 1:
-                    bee.cadastrar();
+                    cadastrar();
                     break;
                 case 2:
-                    bee.login();
+                    login();
                     break;
                 case 3:
-                    bee.fechar();
+                    fechar();
                     break;
                 default:
                     System.out.println("Comando inválido");
-                    bee.menuInicial();
+                    menuInicial();
             }
         } catch (java.util.InputMismatchException e) {
             System.out.println("--- Ta pichuruco?? Da onde tirou isso? ---");
-            bee.erro();
+            erro();
         } catch (Exception e) {
             System.out.println(" Comando inválido, sistema será encerrado");
-            bee.erro();
+            erro();
         }
     }
     public void cadastrar() {
@@ -50,24 +59,24 @@ public class RedeSocialBee {
         for (Usuarios usuarios : perfis) {
             while (login.equals(usuarios.getLogin())) {
                 System.out.println("Login já existe no cadastro, tente novamente");
-                bee.cadastrar();
+                cadastrar();
             }
         }
         System.out.println("Cadastre uma senha de acesso");
         String senha = sc.next();
         while (senha.isEmpty() | senha.isBlank() | login.isEmpty() |login.isBlank() | nome.isBlank() | nome.isEmpty()) {
             System.out.println("Todos os campos são obrigatórios, tentar novamente");
-            bee.cadastrar();
+            cadastrar();
         }
         Usuarios usuarios = new Usuarios(nome,login,senha);
         perfis.add(usuarios);
         System.out.println("Cadastro realizado com sucesso");
-        bee.menuInicial();
+        menuInicial();
     }
     private void login() {
         if (perfis.isEmpty()) {
             System.out.println("É preciso cadastrar antes de fazer o login...");
-            bee.menuInicial();
+            menuInicial();
         }
         System.out.println("---- LOGIN -----");
         System.out.println("Login: ");
@@ -85,8 +94,8 @@ public class RedeSocialBee {
             }
         }
         System.out.println("Login ou senha inválidas, tente novamente");
-        bee.listarUsuarios();
-        bee.menuInicial();
+        listarUsuarios();
+        menuInicial();
     }
     public void fechar() {
         System.out.println();

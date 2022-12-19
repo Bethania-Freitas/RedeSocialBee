@@ -20,6 +20,7 @@ public class RedeSocialBee {
         System.out.println();
         bee.menuInicial();
     }
+
     public void menuInicial() {
         try {
             System.out.println("»»————-　MENU INICIAL　————-««");
@@ -30,13 +31,13 @@ public class RedeSocialBee {
             int opcaoMenu = sc.nextInt();
             switch (opcaoMenu) {
                 case 1:
-                    cadastrar();
+                    cadastrarUsuario();
                     break;
                 case 2:
-                    login();
+                    validacaoDeLoginDeAcessoDoUsuario();
                     break;
                 case 3:
-                    fechar();
+                    encerrarSistema();
                     break;
                 default:
                     System.out.println("Comando inválido");
@@ -50,30 +51,32 @@ public class RedeSocialBee {
             erro();
         }
     }
-    public void cadastrar() {
+
+    public void cadastrarUsuario() {
         System.out.println("Digite seu nome:");
         sc.nextLine();
         String nome = sc.nextLine();
-        System.out.println("Digite um logim para cadastrar:");
+        System.out.println("Digite um login para cadastrar:");
         String login = sc.next().toUpperCase();
         for (Usuarios usuarios : perfis) {
             while (login.equals(usuarios.getLogin())) {
                 System.out.println("Login já existe no cadastro, tente novamente");
-                cadastrar();
+                cadastrarUsuario();
             }
         }
         System.out.println("Cadastre uma senha de acesso");
         String senha = sc.next();
-        while (senha.isEmpty() | senha.isBlank() | login.isEmpty() |login.isBlank() | nome.isBlank() | nome.isEmpty()) {
+        while (senha.isEmpty() | senha.isBlank() | login.isEmpty() | login.isBlank() | nome.isBlank() | nome.isEmpty()) {
             System.out.println("Todos os campos são obrigatórios, tentar novamente");
-            cadastrar();
+            cadastrarUsuario();
         }
-        Usuarios usuarios = new Usuarios(nome,login,senha);
+        Usuarios usuarios = new Usuarios(nome, login, senha);
         perfis.add(usuarios);
         System.out.println("Cadastro realizado com sucesso");
         menuInicial();
     }
-    private void login() {
+
+    private void validacaoDeLoginDeAcessoDoUsuario() {
         if (perfis.isEmpty()) {
             System.out.println("É preciso cadastrar antes de fazer o login...");
             menuInicial();
@@ -91,13 +94,13 @@ public class RedeSocialBee {
                 System.out.println("  Bem vindo/a rede BEE!");
                 System.out.println("╰═🐝════════════════════╯");
                 usuarios.menuUsuario();
+                menuInicial();
             }
         }
-        System.out.println("Login ou senha inválidas, tente novamente");
-        listarUsuarios();
-        menuInicial();
+        System.out.println("Login ou senha incorretos");
     }
-    public void fechar() {
+
+    public void encerrarSistema() {
         System.out.println();
         System.out.println("|￣￣￣￣￣￣￣| ");
         System.out.println("| Volta logo! |");
@@ -106,6 +109,7 @@ public class RedeSocialBee {
         System.out.println("(•ㅅ•) || ");
         System.out.println("/ 　 づ");
         System.out.println();
+        menuInicial();
     }
 
     private void erro() {
@@ -127,14 +131,8 @@ public class RedeSocialBee {
         System.out.println("░░░░▐▌▀▄░░░░░░░░░░░░░░░░░▐▌░░");
         System.out.println("░░░░░█░░▀░░░░░░░░░░░░░░░░▀░░░");
     }
-
-    private void listarUsuarios() {
-        for (Usuarios usuarios : perfis) {
-            System.out.println();
-            System.out.println(usuarios.getNome());
-            System.out.println(usuarios.getLogin());
-            System.out.println(usuarios.getSenha());
-        }
-    }
-
 }
+
+
+
+

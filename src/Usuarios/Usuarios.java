@@ -1,6 +1,7 @@
 package Usuarios;
 
 import Postagens.Postagens;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -8,10 +9,10 @@ import java.util.Scanner;
 
 public class Usuarios {
     static Scanner sc = new Scanner(System.in);
+    private final String login;
+    private final List<Postagens> timelime;
     private String nome;
-    private String login;
     private String senha;
-    private List<Postagens> timelime;
 
     public Usuarios(String nome, String login, String senha) {
         this.nome = nome;
@@ -20,26 +21,12 @@ public class Usuarios {
         this.timelime = new ArrayList<Postagens>();
     }
 
-    public String getNome() {
-        return nome;
-    }
-
+    public String getNome() { return nome; }
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
+    public String getLogin() { return login; }
+    public String getSenha() { return senha; }
     public void setSenha(String senha) {
         this.senha = senha;
     }
@@ -47,10 +34,10 @@ public class Usuarios {
     public List<Postagens> getTimelime() {
         System.out.println("-----Timeline " + getNome() + "-----");
         for (Postagens postagens : timelime) {
-            System.out.println(postagens.getLocalHour() +" - "+ postagens.getLocalDate());
+            System.out.println(postagens.getLocalHour() + " - " + postagens.getLocalDate());
             System.out.println(postagens.getConteudo());
             System.out.println();
-            }
+        }
         return null;
     }
 
@@ -65,21 +52,18 @@ public class Usuarios {
             switch (opcao) {
                 case 1:
                     postar();
-                    menuUsuario();
                     break;
                 case 2:
                     if (timelime.isEmpty()) {
                         System.out.println("Você ainda não fez nenhuma publicação");
                     }
                     getTimelime();
-                    menuUsuario();
                     break;
                 case 3:
-                    System.out.println("Sistema encerrado");
+                    System.out.println("Logout realizado com sucesso!");
                     break;
                 default:
                     System.out.println("Opção inválida!");
-                    menuUsuario();
             }
         } catch (InputMismatchException e) {
             System.out.println("--- Ta pichuruco?? Da onde tirou isso? ---");
